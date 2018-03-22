@@ -1,0 +1,798 @@
+////
+NO CAMBIAR!!
+Codificación, idioma, tabla de contenidos, tipo de documento
+////
+:encoding: utf-8
+:lang: es
+:toc: right
+:toc-title: Tabla de contenidos
+:doctype: book
+:imagesdir: ./images
+
+
+
+
+////
+Nombre y título del trabajo
+////
+# Ionic
+Desarrollo de Aplicaciones Híbridas 
+Máster TAII - UAL
+
+
+// NO CAMBIAR!! (Entrar en modo no numerado de apartados)
+:numbered!: 
+
+
+[abstract]
+## Resumen
+
+Resumen del tutorial de Ionic.
+
+.Objetivos
+
+* Conocer la arquitectura de las aplicaciones Ionic
+* Aprender a utilizar los componentes básicos de Ionic para crear una app.
+* Interactuar con APIs
+* Incorporar el uso de la cámara y el GPS a apps Ionic
+
+// Entrar en modo numerado de apartados
+:numbered:
+
+## Introducción 
+
+Ionic es un framework para el desarrollo de aplicación móviles híbridas con HTML, CSS y JavaScript (Angular). Las apps tienen una única base de código y se pueden empaquetar y distribuir como aplicaciones nativas en las principales tiendas de aplicaciones para móviles, como App Store, Google Play y Microsoft Store.
+
+La gran ventaja de desarrollar con Ionic es que se pueden aprovechar los conocimientos que se tienen del desarrollo de aplicaciones web para el desarrollo de aplicaciones móviles multiplataforma. Si además, se conoce Angular, esta transición es bastante directa.
+
+Por último, gracias a los plugins de https://cordova.apache.org/plugins[Apache Cordova], podemos acceder a las capacidades nativas del dispositivo mediante JavaScript.
+
+## Configuración del entorno
+
+* Instalar Node.js
+* Instalar Apache Cordova `sudo npm install -g cordova`
+* Instalar Ionic CLI `sudo npm install -g ionic`
+* Instalar TypeScript `sudo npm install -g typescript`
+
+[source]
+----
+$ ionic info
+
+cli packages: (/usr/local/lib/node_modules)
+
+    @ionic/cli-utils  : 1.19.2
+    ionic (Ionic CLI) : 3.20.0
+
+local packages:
+
+    @ionic/app-scripts : 3.1.8
+    Ionic Framework    : ionic-angular 3.9.2
+
+System:
+
+    Node : v8.9.4
+    npm  : 3.5.2 
+    OS   : Linux 4.13
+
+Misc:
+
+    backend : pro
+----
+
+## Primera app Ionic
+
+Para el desarrollo de proyectos Ionic usaremos Ionic CLI. Con él podremos iniciar una app, generar elementos de la app (componentes, páginas, providers, ...), iniciar un servidor web local para probar la app en el proceso de desarrollo, y demás operaciones útilies en el proceso de desarrollo de una app Ionic.
+
+Parar crear una app Ionic basta con escribir desde una terminal `ionic start` seguido del nombre de la app. Por ejemplo, `ionic start holamundoionic`.
+
+A continuación tendremos que seleccionar el tipo de proyecto que queremos crear: basado basado en pestañas, en blanco, con barra lateral, ... Elegiremos la opción `tutorial`. 
+
+[source]
+----
+$ ionic start holamundoionic
+
+? What starter would you like to use: (Use arrow keys)
+❯ tabs ............... ionic-angular A starting project with a simple tabbed interface 
+  blank .............. ionic-angular A blank starter project 
+  sidemenu ........... ionic-angular A starting project with a side menu with navigation in the content area 
+  super .............. ionic-angular A starting project complete with pre-built pages, providers and best practices for Ionic development.
+  conference ......... ionic-angular A project that demonstrates a realworld application 
+  tutorial ........... ionic-angular A tutorial based project that goes along with the Ionic documentation 
+  aws ................ ionic-angular AWS Mobile Hub Starter 
+----
+
+En el paso siguiente tendremos que indicar si queremos integrar la app con Cordova, de forma que habilite en la app las funciones nativas de los dispositivos. Para esta primera app indicaremos que no.
+
+A continuación se creará un directorio con el nombre del proyecto, se descargará la plantilla del tipo de proyecto elegido y se instalarán las dependencias, una operación que dura unos minutos.
+
+Por último, tenemos que indicar si queremos instalar el Ionic Pro SDK. Para este primer proyecto, también elegiremos que no.
+
+Con esto, el proyecto ya estará creado. 
+
+[NOTE]
+====
+El proyecto cuenta con un repositorio Git. Al final de la creación del proyecto se realizará de forma automática una operación `add` y una operación `commit` con la versión preliminar del proyecto.
+====
+
+Podemos ver la aplicación funcionando entrando en el directorio de la aplicación y ejecutando `ionic serve` 
+
+[source]
+----
+$ cd holamundoionic
+$ ionic serve
+....
+[07:33:35]  lint started ... 
+[07:33:35]  build dev finished in 15.63 s 
+[07:33:35]  watch ready in 15.71 s 
+[07:33:35]  dev server running: http://localhost:8100/ 
+
+[OK] Development server running!
+     Local: http://localhost:8100
+     External: http://192.168.1.13:8100
+     DevApp: holamundoionic@8100 on mtorres-ThinkPad-T440
+
+[07:33:38]  lint finished in 3.65 s 
+----
+
+Tras unos instantes tenemos funcionando la app en un servidor de pruebas con función _livereload_ al que podremos acceder por el puerto 8100 tal y como se indica al final de las indicaciones de la creación del proyecto.
+
+image:01HelloIonic.png[title = "Primera app Ionic"]
+
+[TIP]
+====
+Se recomienda activar el modo desarrollador del navegador 
+
+* Mozilla Firefox: Web Developer -> Toggle Tools. En la barra de herramientas activar el Responsive Design Mode.
+* Google Chrome: More Tools -> Developer Tools. En la barra de herramientas activar el Toggle device toolbar.
+====
+
+.Ionic Lab
+****
+Ionic ofrece el Ionic Lab en el que podremos ver la app en las tres plataformas principales (Android, iOS y Windows). También nos ofrece una referencia rápida a los componentes Ionic y a la documentación oficial de Ionic.
+
+Para activar el Ionic Lab lanzaremos la aplicación con `ionic serve -l`. La aplicación estará disponible en `http://localhost:8100/ionic-lab`
+
+image:02IonicLab.png[title = "La app de ejemplo en las tres plafaformas móviles"]
+****
+
+### El archivo `index.html` 
+
+El código de la app se encuentra en `src`. Ahí encontramos el archivo `index.html`, el archivo desde el que se carga la app. 
+
+.Fragmento del archivo `src/app/index.html`
+====
+[source]
+----
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+...
+<body>
+...
+
+  <!-- Ionic's root component and where the app will load -->
+  <ion-app></ion-app> <1> 
+
+...
+</body>
+</html>
+----
+<1> Indicación de cargar el componente raíz
+====
+
+
+[NOTE]
+====
+El archivo `index.html` tiene un fragmento JavaScript comentado relacionado con la activación de _service worker_ relacionado con las https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API[aplicaciones web progresivas]
+====
+
+El archivo `app.html` contiene el componente raiz de la app, `<ion-app></ion-app>`. Este componente cargará el contenido de `src/app/app.html`, la vista raiz de la app.
+
+.El archivo `src/app/app.html`
+[source]
+----
+<ion-menu [content]="content">
+
+  <ion-header> <1>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content> <2>
+    <ion-list>
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+----
+<1> Cabecera de la app
+<2> Contenido de la app. Mediante un bucle cargará la lista de páginas y le asociará un controlador de evento
+
+### Páginas de la app y el archivo `app.module.ts`
+
+Las app Ionic están compuestas de componentes página, situados en la carpeta `src/pages`. Durante la ejecución, estas páginas son organizadas en una pila y son gestionadas por el https://ionicframework.com/docs/api/navigation/NavController/[NavController] mostrándolas con una operación `push` y liberándolas con una operación `pop`.
+
+Dado que una app Ionic es una aplicación Angular, los componentes, providers y directivas tienen que ser declaradas en el archivo `src/app/app.module.ts` antes de que las use la aplicación. 
+
+.Declaración de los componentes página en el archivo `src/app/app.module.ts`
+[source]
+----
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp } from './app.component';
+
+import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic'; <1>
+import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { ListPage } from '../pages/list/list';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+@NgModule({
+  declarations: [ <2>
+    MyApp,
+    HelloIonicPage,
+    ItemDetailsPage,
+    ListPage
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [ <3>
+    MyApp,
+    HelloIonicPage,
+    ItemDetailsPage,
+    ListPage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+export class AppModule {}
+----
+<1> Importación de las páginas
+<2> Incorporación de las páginas al array `declarations[]`
+<3> Incorporación de las páginas al array `entryComponents[]`
+
+### Modificación de las páginas generadas.
+
+A modo de ejemplo modificaremos el contenido de la página de inicio (`src/app/pages/hello-ionic/hello-ionic.html`) incluyendo texto ficticio https://getlorem.com/es/[Lorem Ipsum]. Añadiremos al final del tag `<ion-content>` una lista de dos elementos.
+
+[source]
+----
+  <ul>
+    <li>Lorem ipsum dolor sit, amet consectetur.</li> 
+    <li>Suspendisse lobortis senectus justo facilisis hendrerit, euismod interdum morbi.</li>
+  </ul>
+----
+
+Tras guardar los cambios se recargará la app de forma automática y deberá mostrar algo similar a lo siguiente
+
+image:03LoremIpsum.png[title="Aplicación de ejemplo modificada"]
+
+== Creación de una app de ejemplo
+
+A modo de ejemplo crearemos una app que muestre los repositorios de un usuario de GitHub y muestre el archivo `README.md` del repositorio seleccionado.
+
+=== Generación de páginas en Ionic
+
+Las páginas son generadas con `ionic generate page _nombrePagina_` o `ionic g page _nombrePagina_` en su forma abreviada.
+
+Para generar la página `repos` escribiriemos
+
+[source]
+----
+$ ionic g page repos
+
+[OK] Generated a page named repos!
+----
+
+Este comando generará una carpeta `src/app/pages/repos` con cuatro archivos:
+
+* `repos.html`:  Vista de la página. Aquí colocaremos el contenido de la página
+* `repos.module.ts`: Módulo de la clase generada
+* `repos.scss`: Estilos propios de la página
+* `repos.ts`: Controlador de la página
+
+=== Modificación de la página generada
+
+En primer lugar cambiaremos el título de la página y el texto mostrado en la vista. También debemos incluir un botón para activar el menú desde la página de repositorios
+
+.El archivo `src/app/pages/repos/repos.html`
+====
+[source]
+----
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle> <1>
+      <ion-icon name="menu"></ion-icon> 
+    </button>
+    <ion-title>Repositorios</ion-title> <2>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  Página vista de repositorios <3>
+</ion-content>
+----
+====
+<1> Incorporación de un botón para mostrar el menú
+<2> Modificación del título
+<3> Modificación del contenido
+
+A continuación cambiaremos en el controlador el texto mostrado en la consola al cargar la vista.
+
+.El archivo `src/app/pages/repos/repos.ts`
+====
+[source]
+----
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+@IonicPage()
+@Component({
+  selector: 'page-repos', <1>
+  templateUrl: 'repos.html',
+})
+export class ReposPage {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  ionViewDidLoad() {
+    console.log('Cargada la página de repositorios'); <2>
+  }
+
+}
+----
+<1> Selector asignado a la vista y que incluiremos en las vistas en la que quedamos incluir esta página
+<2> Mensaje a mostrar en la consola al cargar la página
+====
+
+### Modificación del archivo `app.module.ts`
+
+Tras crear una página deberemos actualizar `app.module.ts` añadiendo la página a la zona de importaciones y modificando las propiedades `declarations` y `entryPoints` de `@NgModule`.
+
+Aprovecharemos para eliminar las referencias de las páginas `ItemDetailsPage` y `ListPage` creadas para el tutorial, y para importar `HttpModule`, el cual será necesario más adelante cuando definamos el servicio.
+
+.Actualización del archivo `app.module.ts` para incluir la página de repositorios
+====
+[source]
+----
+...
+import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { ReposPage } from '../pages/repos/repos'; <1>
+
+import {HttpModule} from '@angular/http'; <2>
+
+...
+@NgModule({
+  declarations: [
+    MyApp,
+    HelloIonicPage,
+    ReposPage <3>
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+    HttpModule <4>
+  ],
+  ...
+  entryComponents: [
+    MyApp,
+    HelloIonicPage,
+    ReposPage <5>
+  ],
+  ...
+})
+export class AppModule {}
+----
+<1> Importación de la página de repositorios. Hay que indicar la ruta al archivo desde la ubicación de `app.module.ts`
+<2> Importación de `HttpModule` para la creación del servicio
+<3> Incoporación de la página de repositorios al array `declarations`
+<4> Incoporación de `HttpModule` al array `imports`
+<5> Incoporación de la página de repositorios al array `entrytComponents`
+====
+
+### Modificación del archivo `app.component.ts`
+
+En este archivo realizaremos los cambios relacionados con el menú lateral para eliminar las referencias a las páginas no necesarias y para incluir la referencia a la página creada. Será necesario añadir la página a la ista de importaciones.
+
+En el archivo también indicaremos el texto que se usará en el menú lateral para hacer referencia a la página creada.
+
+.Actualización del archivo `app.component.ts` para incluir la página de repositorios
+====
+[source]
+----
+...
+import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { ReposPage } from '../pages/repos/repos'; <1>
+...
+export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
+  // make HelloIonicPage the root (or first) page
+  rootPage = HelloIonicPage; <2>
+  pages: Array<{title: string, component: any}>;
+
+  constructor(
+    public platform: Platform,
+    public menu: MenuController,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen
+  ) {
+    this.initializeApp();
+
+    // set our app's pages
+    this.pages = [ <3>
+      { title: 'Inicio', component: HelloIonicPage }, 
+      { title: 'Repos de un usuario', component: ReposPage }
+    ];
+  }
+  ...
+}
+----
+<1> Importación de la página de repositorios. Mantenemos la página de inicio del tutorial por comodidad. Lo habitual sería cambiarla pero exige otras modificaciones que evitaremos por ahora
+<2> Seguimos manteniedo la página de inicio del tutorial
+<3> Array con las páginas a cargar desde el menú lateral y sus títulos asociados.
+====
+
+### Modificación de la página de inicio
+
+Cambiar la cabecera y el contenido de la página de esta forma
+
+.Actualización del archivo `src/app/pages/hello-ionic.html`
+====
+[source]
+----
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>GitHub Ionic</ion-title> <1>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding> <2>
+  
+  <h3>GitHub Ionic</h3>
+  
+  <p>
+    App Ionic que muestra los repositorios GitHub de un usuario accediendo a la <a href = "https://developer.github.com/v3/">API de GitHub</a>
+  </p>
+  
+</ion-content>
+----
+<1> Nueva cabecera
+<2> Nuevo contenido
+====
+
+Con todos los cambios realizados la aplicación deberá verse así
+
+image:04GitHubInicio.png[title="Menú de inicio, página de inicio y de repositorios"]
+
+### Creación del modelo para los repositorios
+
+Crearemos un modelo para almacenar cada uno de los repositorios GitHiub de un usuario. Se trata de una clase que guarda los campos que queremos extraer de los repositorios a través la API, ignorando aquellos campos en los que no estemos interesados. En nuestro caso nos quedaremos con el nombre y descripción de los repositorios (`name` y `description`).
+
+[TIP]
+====
+Para una mayor organización, almacenaremos los modelos del proyecto en una carpeta `src/models`.
+====
+
+
+### Creación de un servicio para obtener los repos de un usuario
+
+Vamos a crear un servicio para obtener los repos de un usuario GitHub desde `https://api.github.com/users/_nombreusuario_/repos`, donde `_nombreusuario_` corresponde con un usuario GitHub. En esta aplicación, el nombre de usuario será obtenido a partir de un cuadro de texto que crearemos más adelante.
+
+Los servicios se crean con `ionic generate provider _servicio_` o `ionic g provider _servicio_` en su forma abreviada. Para crear el servicio `repos` escribiremos 
+
+[source]
+----
+$ ionic g provider repos
+----
+
+Esto creará una carpeta `src/providers` y un archivo `src/providers/repos.ts`. 
+
+.El decorador `@Injectable`
+****
+Al crear un servicio, Ionic CLI le añade el decorador `@Injectable`. A aquellos componentes en los que queramos usar el servicio, lo _inyectaremos_ en su constructor y así podrán acceder a la funcionalidad implementada por los métodos del servicio. 
+
+Al inyectar un servicio en el constructor se creará una variable de instancia desde la que podremos acceder a la funcionalidad implementada por los métodos del servicio.
+****
+
+El servicio contará con un método que devolverá un array con los repositorios del usuario proporcionado. En el servicio generado tenemos que hacer las siguientes modificaciones:
+
+* Cambiar la importación de `HttpClient` por la de `Http`
+* Modificar el tipo de datos del parámetro `http` en el constructor para adaptarlo a la importación del paso anterior.
+* Importar el modelo del repositorio, `Observable` y el método `map`. Dichos componentes no están disponibles en Angular y son incorporados de la librería de ReactJS (RxJS).
+* Crear un método `getRepos()` que obtendrá los repos del usuario que se pase como parámetro. Este método devuelve los repositorios como un https://angular.io/guide/observables[_observable_]
+
+.Observables
+****
+Debido a la naturaleza asíncrona de JavaScript, necesitamos una forma de consumir de los servicios de forma que se vayan incorporando a él los datos conforme se vayan obteniendo y que les lleguen a los componentes que consumen los servicios. Para ello, los servicios definirán métodos observables y los consumidores se suscribirán a su contenido.
+
+Imagina un observable como un flujo de datos al que te puedes suscribir.
+****
+
+.El servicio `src/providers/repos/repos.ts
+====
+[source]
+----
+import { Http } from '@angular/http'; <1>
+import { Injectable } from '@angular/core';
+
+import { Repo } from '../../models/repo'; <2>
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+@Injectable()
+export class ReposProvider {
+
+  constructor(public http: Http) { } <3>
+
+  getRepos(username): Observable<Repo[]> { <4>
+    return this.http.get(`https://api.github.com/users/${username}/repos`).map(res => <Repo[]>res.json()); <5>
+  }
+}
+----
+<1> Modificación del componente Http importado
+<2> Importación de la clase del modelo del repositorio, del componente `Observable` y del método `map` (El método `map` crea un array con el resultado de llamar a la función proporcionada sobre cada elemento del array)
+<3> Modificación del tipo del parámetro del constructor y eliminación del cuerpo predefinido del constructor.
+<4> Método que devuelve la lista de repositorios como un array observable a partir de una llamada a la API de GitHub
+<5> Arrow function para devolver la respuesta JSON como un array de objetos repositorio.
+====
+
+.Arrow functions
+****
+Son una forma compacta de definir funciones anónimas 
+
+[source]
+----
+// Ejemplo 1
+([param] [, param]) => {
+  statements
+}
+
+// Ejemplo 2
+param => expression
+----
+
+Y este sería su código JavaScript equivalente
+
+[source]
+----
+
+// Ejemplo 1
+function ([param] [, param]) {
+  statements
+}
+
+// Ejemplo 2
+function (param) {
+  return expression
+}
+----
+****
+
+### Creación del controlador de la vista de repositorios
+
+El controlador devolverá un array de objetos repositorio a partir de un nombre de usuario de GitHub. Por tanto, contará con una variable de instancia para recibir el nombre de usuario de la vista y con un array de objetos repositorio (los cuales habrá que importar) que entregará a la vista para que los presente. Además, realizará inyección de dependencias inyectando en su constructor el servicio creado. Por tanto, habrá que importar también el servicio. 
+
+
+.El archivo `src/app/pages/repos/repos.ts`
+====
+[source]
+----
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Repo } from '../../models/repos'; <1>
+import { ReposProvider } from '../../providers/repos/repos'; <2>
+
+@IonicPage()
+@Component({
+  selector: 'page-repos',
+  templateUrl: 'repos.html',
+})
+export class ReposPage {
+  repos: Repo[];
+  public username;
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    private reposProvider: ReposProvider) {  } <3>
+
+  getRepos() { <4>
+    this.reposProvider.getRepos(this.username).subscribe(reposArray => {
+      this.repos = reposArray;
+    }) 
+  }
+
+
+  ionViewDidLoad() {  }
+}
+----
+<1> Importación del modelo de repositorio
+<2> Importación del servicio
+<3> Inyección del servicio
+<4> Método que se suscribe al servicio y construye el array de repositorios
+====
+
+### Creación de la vista del listado de repositorios
+
+La vista estará formada por un cuadro de texto para introducir el nombre usuario de GitHub, un botón para realizar la petición y la lista de repositorios del usuario. Tanto el cuadro de texto como la lista estarán vinculados a variables de instancia en su controlador.
+
+.El archivo `src/app/pages/repos/repos.html`
+====
+[source]
+----
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Repositorios</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-input [(ngModel)]="username" type="text" placeholder="GitHub username"></ion-input> <1>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button block (click)="getRepos()" ion-button>Obtener repositorios</button> <2>
+  </div>
+  
+  <ion-list>
+    <button ion-item *ngFor="let repo of repos"> <3>
+      <h2>{{ repo.name }}</h2> <4>
+      <p>{{ repo.description }}</p>
+      
+      <ion-icon name="arrow-forward" item-right></ion-icon> <5>
+    </button>
+  </ion-list>
+</ion-content>
+----
+<1> Cuadro de texto ligado a la variable de instancia `username` del controlador mediante `ngModel`
+<2> Botón con el controlador de evento asociado para la obtención de los repositorios. No se pasa el nombre de usuario ya que está almacenado en la variable de instancia del controlador
+<3> Iteración sobre la lista de repositorios creando un botón para cada repositorio encontrado. La lista de repositorios `repos` es una variable de instancia del controlador
+<4> Nombre y descripción del repositorio
+<5> Botón de flecha para mostrar más adelante detalles del repositorio
+====
+
+### Añadir una página de detalle del repositorio
+
+Continuando con nuestra aplicación estamos interesados en mostrar detalles de un repositorio al seleccionarlo en la lista de resultados. Esto lo podemos hacer pasando a una página de detalle para mostrar los resultados. Seguiremos estos pasos:
+
+. Crear la página de detalle 
+
++
+[source]
+----
+ionic g page repo-details
+----
+
+. Modificar el archivo `src/app/app.module.ts` añadiendo la página a la zona de importaciones y añadiendo la clase de la página a los arrays `declarations` y `entryPoints` de `@NgModule`.
+
++
+[source]
+----
+...
+import { RepoDetailsPage } from '../pages/repo-details/repo-details';
+...
+
+@NgModule({
+  declarations: [
+    ...
+    RepoDetailsPage
+  ],
+  entryComponents: [
+    ...
+    RepoDetailsPage
+  ],
+  ...
+})
+...
+----
+
+. Crear un método en el controlador de la página que hace la llamada (`src/app/pages/repos/repos.ts`) que se encargue de abrir la página de detalle. El método tomará como parámetro el repositorio del que se quiere mostrar la información detallada, por lo que habrá que importar la clase del modelo del repositorio. Para abrir la página de detalle, le pasaremos al NavController la página de detalle, por lo que también habrá que importarla.
+
++
+.Modificación de `src/app/pages/repos/repos.ts` para abrir la piǵna de detalles
+====
+[source]
+----
+...
+import { Repo } from '../../models/repo'; <1>
+import { RepoDetailsPage } from '../repo-details/repo-details'; <2>
+...
+
+  getDetails(repo: Repo) { <3>
+    this.navCtrl.push(RepoDetailsPage, {repo: repo}); <4>
+  }
+----
+<1> Importar el modelo del repositorio para poder pasar información a la página de detalle
+<2> Importar la página de detalle a abrir
+<3> Método que se encarga de abrir la página de detalle
+<4> Abrir la página de detalle pasándosela a NavController junto con un parámetro `repo`. Los parámetros son pasados como una lista clave-valor
+====
+
+. Obtener los parámetros en la página de detalle `src/app/pages/repo-details/repo-details.ts`
+
++
+.El archivo `src/app/pages/repo-details/repo-details.ts`
+====
+[source]
+----
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Repo } from '../../models/repo'; <1>
+
+@IonicPage()
+@Component({
+  selector: 'page-repo-details',
+  templateUrl: 'repo-details.html',
+})
+export class RepoDetailsPage {
+  repo: Repo; <2>
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.repo = navParams.get('repo'); <3>
+
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad RepoDetailsPage');
+  }
+
+}
+----
+<1> Importar el modelo del repositorio 
+<2> Variable de instancia para el repositorio recogido como parámetro. Esta variable nos permite poder manejar el repositorio desde la vista
+<3> Recuperar el repositorio pasado como parámetro
+====
+
+. Mostrar los detalles en la vista
+
++
+.El archivo `src/app/pages/repo-details/repo-details.html`
+====
+[source]
+----
+<ion-header>
+  
+  <ion-navbar>
+    <ion-title>Detalles</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content padding>
+  <h2>Información del repositorio</h2>
+  <div *ngIf="repo.description; else elseBlock"> <1>
+    <p>{{repo.description}}</p> <2>
+  </div>
+  <ng-template #elseBlock>No hay descripción disponible</ng-template> <3>
+</ion-content>
+----
+<1> Uso del `If-then-else` de Angular para mostrar la descripción si existe
+<2> Mostrar la descripción del repositorio
+<3> Indicar que no hay información disponible
+====
