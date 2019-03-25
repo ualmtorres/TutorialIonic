@@ -16,8 +16,8 @@ Codificación, idioma, tabla de contenidos, tipo de documento
 Nombre y título del trabajo
 ////
 # Ionic
-Desarrollo de Aplicaciones Híbridas 
-Máster TAII - UAL
+Tutorial de Ionic
+Manuel Torres <mtorres@ual.es>
 
 
 // NO CAMBIAR!! (Entrar en modo no numerado de apartados)
@@ -51,7 +51,7 @@ Por último, gracias a los plugins de https://cordova.apache.org/plugins[Apache 
 
 * Instalar Node.js
 * Instalar Apache Cordova `sudo npm install -g cordova`
-* Instalar Ionic CLI `sudo npm install -g ionic@3.20.0`
+* Instalar Ionic CLI `sudo npm install -g ionic`
 * Instalar TypeScript `sudo npm install -g typescript`
 
 [source]
@@ -83,7 +83,7 @@ Misc:
 
 Para el desarrollo de proyectos Ionic usaremos Ionic CLI. Con él podremos iniciar una app, generar elementos de la app (componentes, páginas, providers, ...), iniciar un servidor web local para probar la app en el proceso de desarrollo, y demás operaciones útilies en el proceso de desarrollo de una app Ionic.
 
-Parar crear una app Ionic basta con escribir desde una terminal `ionic start` seguido del nombre de la app. Por ejemplo, `ionic start holamundoionic`.
+Parar crear una app Ionic basta con escribir desde una terminal `ionic start` seguido del nombre de la app. Por ejemplo, `ionic start holamundoionic`-
 
 A continuación tendremos que seleccionar el tipo de proyecto que queremos crear: basado basado en pestañas, en blanco, con barra lateral, ... Elegiremos la opción `tutorial`. 
 
@@ -91,20 +91,14 @@ A continuación tendremos que seleccionar el tipo de proyecto que queremos crear
 ----
 $ ionic start holamundoionic
 
-? What starter would you like to use: 
-  tabs ............... ionic-angular A starting project with a simple tabbed int
-erface 
+? What starter would you like to use: (Use arrow keys)
+❯ tabs ............... ionic-angular A starting project with a simple tabbed interface 
   blank .............. ionic-angular A blank starter project 
-  sidemenu ........... ionic-angular A starting project with a side menu with na
-vigation in the content area 
-  super .............. ionic-angular A starting project complete with pre-built 
-pages, providers and best practices for Ionic development. 
-  conference ......... ionic-angular A project that demonstrates a realworld app
-lication 
-❯ tutorial ........... ionic-angular A tutorial based project that goes along wi
-th the Ionic documentation 
+  sidemenu ........... ionic-angular A starting project with a side menu with navigation in the content area 
+  super .............. ionic-angular A starting project complete with pre-built pages, providers and best practices for Ionic development.
+  conference ......... ionic-angular A project that demonstrates a realworld application 
+  tutorial ........... ionic-angular A tutorial based project that goes along with the Ionic documentation 
   aws ................ ionic-angular AWS Mobile Hub Starter 
-
 ----
 
 En el paso siguiente tendremos que indicar si queremos integrar la app con Cordova, de forma que habilite en la app las funciones nativas de los dispositivos. Para esta primera app indicaremos que no.
@@ -163,35 +157,7 @@ image:02IonicLab.png[title = "La app de ejemplo en las tres plafaformas móviles
 
 ### El archivo `index.html` 
 
-El código de la app se encuentra en `src`. Ahí encontramos el archivo `index.html`, el archivo desde el que se carga la app. 
-
-.Fragmento del archivo `src/app/index.html`
-====
-[source]
-----
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-...
-<body>
-...
-
-  <!-- Ionic's root component and where the app will load -->
-  <ion-app></ion-app> <1> 
-
-...
-</body>
-</html>
-----
-<1> Indicación de cargar el componente raíz
-====
-
-
-[NOTE]
-====
-El archivo `index.html` tiene un fragmento JavaScript comentado relacionado con la activación de _service worker_ relacionado con las https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API[aplicaciones web progresivas]
-====
-
-El archivo `app.html` contiene el componente raiz de la app, `<ion-app></ion-app>`. Este componente cargará el contenido de `src/app/app.html`, la vista raiz de la app.
+El código de la app se encuentra en `src`. Ahí encontramos el archivo `index.html`, el archivo desde el que se carga la app. Este archivo contiene el componente raiz de la app, `<ion-app></ion-app>`. Este componente cargará el contenido de `src/app/app.html`, la vista raiz de la app.
 
 .El archivo `src/app/app.html`
 [source]
@@ -216,8 +182,13 @@ El archivo `app.html` contiene el componente raiz de la app, `<ion-app></ion-app
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
 ----
-<1> Cabecera de la barra de menú
+<1> Cabecera de la app
 <2> Contenido de la app. Mediante un bucle cargará la lista de páginas y le asociará un controlador de evento
+
+[NOTE]
+====
+El archivo `index.html` tiene un fragmento JavaScript comentado relacionado con la activación de _service worker_ relacionado con las https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API[aplicaciones web progresivas]
+====
 
 ### Páginas de la app y el archivo `app.module.ts`
 
@@ -272,7 +243,7 @@ export class AppModule {}
 
 ### Modificación de las páginas generadas.
 
-A modo de ejemplo modificaremos el contenido de la página de inicio (`src/app/pages/hello-ionic/hello-ionic.html`) incluyendo texto ficticio https://getlorem.com/es/[Lorem Ipsum]. Añadiremos al final del tag `<ion-content>` una lista de dos elementos.
+A modo de ejemplo modificaremos el contenido de la página de inicio incluyendo texto ficticio https://getlorem.com/es/[Lorem Ipsum]. Añadiremos al final del tag `<ion-content>` una lista de dos elementos.
 
 [source]
 ----
@@ -288,11 +259,11 @@ image:03LoremIpsum.png[title="Aplicación de ejemplo modificada"]
 
 == Creación de una app de ejemplo
 
-A modo de ejemplo crearemos una app que muestre los repositorios de un usuario de GitHub y muestre el archivo `README.md` del repositorio seleccionado.
+A modo de ejemplo crearemos una app que muestre los repositorios de un usuario de GitHub y muestre el archivo README.md del repositorio seleccionado.
 
 === Generación de páginas en Ionic
 
-Las páginas son generadas con `ionic generate page _nombrePagina_` o `ionic g page _nombrePagina_` en su forma abreviada.
+Las páginas son generadas con `ionic generate page _nombrePagina_` o `ionic g p _nombrePagina_` en su forma abreviada.
 
 Para generar la página `repos` escribiriemos
 
@@ -308,7 +279,7 @@ Este comando generará una carpeta `src/app/pages/repos` con cuatro archivos:
 * `repos.html`:  Vista de la página. Aquí colocaremos el contenido de la página
 * `repos.module.ts`: Módulo de la clase generada
 * `repos.scss`: Estilos propios de la página
-* `repos.ts`: Controlador de la página
+* `repos.ts`: Controlador de lá página
 
 === Modificación de la página generada
 
@@ -337,7 +308,7 @@ En primer lugar cambiaremos el título de la página y el texto mostrado en la v
 <2> Modificación del título
 <3> Modificación del contenido
 
-A continuación cambiaremos en el controlador el texto mostrado en la consola al cargar la vista.
+A continuación cambiaremos en el controlador el texto mostrado al cargar la vista
 
 .El archivo `src/app/pages/repos/repos.ts`
 ====
@@ -366,9 +337,9 @@ export class ReposPage {
 <2> Mensaje a mostrar en la consola al cargar la página
 ====
 
-### Modificación del archivo `app.module.ts`
+### Modificación de los archivos `app.module.ts` y `app.component.ts`
 
-Tras crear una página deberemos actualizar `app.module.ts` añadiendo la página a la zona de importaciones y modificando las propiedades `declarations` y `entryPoints` de `@NgModule`.
+Tras crear una página deberemos actualizar `app.module.ts` y `app.component.ts` añadiendo la página a la zona de importaciones y modificando las propiedades `declarations` y `entryPoints` de `@NgModule`.
 
 Aprovecharemos para eliminar las referencias de las páginas `ItemDetailsPage` y `ListPage` creadas para el tutorial, y para importar `HttpModule`, el cual será necesario más adelante cuando definamos el servicio.
 
@@ -411,12 +382,6 @@ export class AppModule {}
 <5> Incoporación de la página de repositorios al array `entrytComponents`
 ====
 
-### Modificación del archivo `app.component.ts`
-
-En este archivo realizaremos los cambios relacionados con el menú lateral para eliminar las referencias a las páginas no necesarias y para incluir la referencia a la página creada. Será necesario añadir la página a la ista de importaciones.
-
-En el archivo también indicaremos el texto que se usará en el menú lateral para hacer referencia a la página creada.
-
 .Actualización del archivo `app.component.ts` para incluir la página de repositorios
 ====
 [source]
@@ -441,8 +406,8 @@ export class MyApp {
     this.initializeApp();
 
     // set our app's pages
-    this.pages = [ <3>
-      { title: 'Inicio', component: HelloIonicPage }, 
+    this.pages = [
+      { title: 'Inicio', component: HelloIonicPage }, <3>
       { title: 'Repos de un usuario', component: ReposPage }
     ];
   }
@@ -451,7 +416,7 @@ export class MyApp {
 ----
 <1> Importación de la página de repositorios. Mantenemos la página de inicio del tutorial por comodidad. Lo habitual sería cambiarla pero exige otras modificaciones que evitaremos por ahora
 <2> Seguimos manteniedo la página de inicio del tutorial
-<3> Array con las páginas a cargar desde el menú lateral y sus títulos asociados.
+<3> Títulos que tendrán las páginas en el menú lateral
 ====
 
 ### Modificación de la página de inicio
@@ -486,33 +451,23 @@ Cambiar la cabecera y el contenido de la página de esta forma
 <2> Nuevo contenido
 ====
 
-Con todos los cambios realizados la aplicación deberá verse así
+La aplicación deberá verse así
 
 image:04GitHubInicio.png[title="Menú de inicio, página de inicio y de repositorios"]
 
 ### Creación del modelo para los repositorios
 
-Crearemos un modelo para almacenar cada uno de los repositorios GitHub de un usuario. Se trata de una clase que guarda los campos que queremos extraer de los repositorios a través la API, ignorando aquellos campos en los que no estemos interesados. En nuestro caso nos quedaremos con el nombre y descripción de los repositorios (`name` y `description`).
+Crearemos un modelo para almacenar cada uno de los repositorios GitHiub de un usuario. Se trata de una clase que guarda los campos que queremos extraer de los repositorios a través la API, ignorando aquellos campos en los que no estemos interesados. En nuestro caso nos quedaremos con el nombre y descripción de los repositorios (`name` y `description`).
 
 [TIP]
 ====
-Para una mayor organización, almacenaremos los modelos del proyecto en una carpeta `src/models`.
+Para una mayor organización, almacenaremos los modelos en una carpeta `src/models` que crearemos desde la terminal.
 ====
 
-.El archivo `src/models/repo.ts`
-====
-[source, js]
-----
-export interface Repo {
-    name: string;
-    description: string;
-}
-----
-====
 
 ### Creación de un servicio para obtener los repos de un usuario
 
-Vamos a crear un servicio para obtener los repos de un usuario GitHub desde `https://api.github.com/users/_nombreusuario_/repos`, donde `_nombreusuario_` corresponde con un usuario GitHub. En esta aplicación, el nombre de usuario será obtenido a partir de un cuadro de texto que crearemos más adelante.
+Vamos a crear un servicio para obtener los repos de un usuario GitHub desde https://api.github.com/users/_nombreusuario_/repos, donde _nombreusuario_ corresponde con un usuario GitHub. En esta aplicación, el nombre de usuario será obtenido a partir de un cuadro de texto que crearemos más adelante.
 
 Los servicios se crean con `ionic generate provider _servicio_` o `ionic g provider _servicio_` en su forma abreviada. Para crear el servicio `repos` escribiremos 
 
@@ -525,17 +480,15 @@ Esto creará una carpeta `src/providers` y un archivo `src/providers/repos.ts`.
 
 .El decorador `@Injectable`
 ****
-Al crear un servicio, Ionic CLI le añade el decorador `@Injectable`. A aquellos componentes en los que queramos usar el servicio, lo _inyectaremos_ en su constructor y así podrán acceder a la funcionalidad implementada por los métodos del servicio. 
-
-Al inyectar un servicio en el constructor se creará una variable de instancia desde la que podremos acceder a la funcionalidad implementada por los métodos del servicio.
+Al crear un servicio, Ionic CLI le añade el decorador `@Injectable`. Aquellos componentes que quieran usar este servicio lo _inyectarán_ en su constructor y así podrán acceder a la funcionalidad implementada por los métodos del servicio. 
 ****
 
-El servicio `repos` contará con un método que devolverá un array con los repositorios del usuario proporcionado. En el servicio generado tenemos que hacer las siguientes modificaciones:
+El servicio devolverá un array de repositorios. En el servicio generado tenemos que hacer las siguientes modificaciones:
 
 * Cambiar la importación de `HttpClient` por la de `Http`
 * Modificar el tipo de datos del parámetro `http` en el constructor para adaptarlo a la importación del paso anterior.
-* Importar el modelo del repositorio, `Observable` y el método `map`. Dichos componentes no están disponibles en Angular y son incorporados de la librería de ReactJS (RxJS).
-* Crear un método `getRepos()` que obtendrá los repos del usuario que se pase como parámetro. Este método devuelve los repositorios como un https://angular.io/guide/observables[_observable_]
+* Importar el modelo del repositorio, `Observable` y el método `map`. Dichos componentes no están disponibles en Angular y son incorporados de la librería de React.
+* Crear un método `getRepos()` que obtendrá los repos del usuario que se pase com parámetro. Este método devuelve los repositorios como un _observable_
 
 .Observables
 ****
@@ -557,7 +510,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ReposProvider {
-  username: string;
 
   constructor(public http: Http) { } <3>
 
@@ -567,8 +519,8 @@ export class ReposProvider {
 }
 ----
 <1> Modificación del componente Http importado
-<2> Importación de la clase del modelo del repositorio, del componente `Observable` y del método `map` (El método `map` crea un array con el resultado de llamar a la función proporcionada sobre cada elemento del array)
-<3> Modificación del tipo del parámetro del constructor y eliminación del cuerpo predefinido del constructor.
+<2> Importación de la clase del modelo del repositorio del componente `Observable` y del método `map` (El método `map` crea un array con el resultado de llamar a la función proporcionada sobre cada elemento del array)
+<3> Modificación del tipo del parámetro del constructor y eliminación del cuerpo predefinido del constructror.
 <4> Método que devuelve la lista de repositorios como un array observable a partir de una llamada a la API de GitHub
 <5> Arrow function para devolver la respuesta JSON como un array de objetos repositorio.
 ====
@@ -605,38 +557,6 @@ function (param) {
 ----
 ****
 
-#### Modificación del archivo `/src/app/app.module.ts`
-
-Una vez implementados los métodos del servicio, hay que incluir `HttpModule` en el archivo de módulos `app.module.ts` y añadir el servicio creado (`ReposProvider`)
-
-.Actualización del archivo `src/app/app.module.ts` para incluir `HttpModule`
-====
-[source, js]
-----
-import { HttpModule } from '@angular/http'; <1> 
-...
-
-@NgModule({
-  ...
-  imports: [
-    ...
-    HttpModule <2>
-  ],
-  ...
-  providers: [
-    ...
-    ReposProvider, <3>
-    HttpModule 
-  ]
-})
-...
-----
-<1> Importar `HttpModule`
-<2> Incluir `HttpModule` en el array `imports`
-<3> Incluir el servicio (`ReposProvider`) y `HttpModule` en el array `providers`
-====
-
-
 ### Creación del controlador de la vista de repositorios
 
 El controlador devolverá un array de objetos repositorio a partir de un nombre de usuario de GitHub. Por tanto, contará con una variable de instancia para recibir el nombre de usuario de la vista y con un array de objetos repositorio (los cuales habrá que importar) que entregará a la vista para que los presente. Además, realizará inyección de dependencias inyectando en su constructor el servicio creado. Por tanto, habrá que importar también el servicio. 
@@ -658,15 +578,14 @@ import { ReposProvider } from '../../providers/repos/repos'; <2>
   templateUrl: 'repos.html',
 })
 export class ReposPage {
-  username: string; <3>
-  repos: Repo[]; <4>
-
+  repos: Repo[];
+  public username;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    private reposProvider: ReposProvider) {  } <5>
+    private reposProvider: ReposProvider) {  } <3>
 
-  getRepos() { <6>
+  getRepos() { <4>
     this.reposProvider.getRepos(this.username).subscribe(reposArray => {
       this.repos = reposArray;
     }) 
@@ -678,10 +597,8 @@ export class ReposPage {
 ----
 <1> Importación del modelo de repositorio
 <2> Importación del servicio
-<3> Qué necesita el controlador para generar la lista de repositorios
-<4> Qué devuelve el controlador
-<5> Inyección del servicio
-<6> Método que se suscribe al servicio y construye el array de repositorios
+<3> Inyección del servicio
+<4> Método que se suscribe al servicio y construye en array de repositorios
 ====
 
 ### Creación de la vista del listado de repositorios
@@ -763,10 +680,10 @@ import { RepoDetailsPage } from '../pages/repo-details/repo-details';
 ...
 ----
 
-. Crear un método en el controlador de la página que hace la llamada (`src/app/pages/repos/repos.ts`) que se encargue de abrir la página de detalle. El método tomará como parámetro el repositorio del que se quiere mostrar la información detallada, por lo que habrá que importar la clase del modelo del repositorio. Para abrir la página de detalle, le pasaremos al NavController la página de detalle, por lo que también habrá que importarla.
+. Crear un método en el controlador de la página que hace la llamada (`src/app/pages/repos/repos.ts`) que se encargue de abrir la página de detalle. El método tomará como parámetro el repositorio del que se quiere mostrar la información detallada por lo que habrá que importar la clase del modelo del repositorio. Para abrir la página de detalle, le pasaremos al NavController la página de detalle, por lo que también habrá que importarla.
 
 +
-.Modificación de `src/app/pages/repos/repos.ts` para abrir la página de detalles
+.Modificación de `src/app/pages/repos/repos.ts` para abrir la piǵna de detalles
 ====
 [source]
 ----
@@ -782,31 +699,9 @@ import { RepoDetailsPage } from '../repo-details/repo-details'; <2>
 <1> Importar el modelo del repositorio para poder pasar información a la página de detalle
 <2> Importar la página de detalle a abrir
 <3> Método que se encarga de abrir la página de detalle
-<4> Abrir la página de detalle pasándosela a NavController junto con un parámetro `repo`. Los parámetros son pasados como una lista clave-valor
+<4> Abrir la página de detalle pasándosela a NavController junto con un parámetro repo
 ====
 
-. Modificar la vista para llamar al método que carga la página de detalles
-
-+
-
-.El archivo `src/pages/repos/repos.html`
-====
-[source]
-----
-...
-<ion-list>
-<button ion-item *ngFor="let repo of repos" (click)="getDetails(repo)"> <1>
-  <h2>{{ repo.name }}</h2>
-  <p>{{ repo.description }}</p>
-
-  <ion-icon name="arrow-forward" item-right></ion-icon>
-</button>
-</ion-list>
-...
-----
-<1> Al hacer clic llamar al método `getDetails` pasándole el repositorio seleccionado.
-====
-  
 . Obtener los parámetros en la página de detalle `src/app/pages/repo-details/repo-details.ts`
 
 +
@@ -866,7 +761,7 @@ export class RepoDetailsPage {
   <ng-template #elseBlock>No hay descripción disponible</ng-template> <3>
 </ion-content>
 ----
-<1> Uso del `If-then-else` de Angular para mostrar la descripción si existe
+<1> Uso del If-then-else de Angular para mostrar la descripción si existe
 <2> Mostrar la descripción del repositorio
 <3> Indicar que no hay información disponible
 ====

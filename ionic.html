@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5.dev">
-<meta name="author" content="Desarrollo de Aplicaciones Híbridas">
+<meta name="author" content="Tutorial de Ionic">
 <title>Ionic</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -423,8 +423,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Ionic</h1>
 <div class="details">
-<span id="author" class="author">Desarrollo de Aplicaciones Híbridas</span><br>
-<span id="revdate">Máster TAII - UAL</span>
+<span id="author" class="author">Tutorial de Ionic</span><br>
+<span id="revdate">Manuel Torres &lt;mtorres@ual.es&gt;</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Tabla de contenidos</div>
@@ -443,14 +443,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#truegeneraci-n-de-p-ginas-en-ionic">4.1. Generación de páginas en Ionic</a></li>
 <li><a href="#truemodificaci-n-de-la-p-gina-generada">4.2. Modificación de la página generada</a></li>
-<li><a href="#truemodificaci-n-del-archivo-code-app-module-ts-code">4.3. Modificación del archivo <code>app.module.ts</code></a></li>
-<li><a href="#truemodificaci-n-del-archivo-code-app-component-ts-code">4.4. Modificación del archivo <code>app.component.ts</code></a></li>
-<li><a href="#truemodificaci-n-de-la-p-gina-de-inicio">4.5. Modificación de la página de inicio</a></li>
-<li><a href="#truecreaci-n-del-modelo-para-los-repositorios">4.6. Creación del modelo para los repositorios</a></li>
-<li><a href="#truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario">4.7. Creación de un servicio para obtener los repos de un usuario</a></li>
-<li><a href="#truecreaci-n-del-controlador-de-la-vista-de-repositorios">4.8. Creación del controlador de la vista de repositorios</a></li>
-<li><a href="#truecreaci-n-de-la-vista-del-listado-de-repositorios">4.9. Creación de la vista del listado de repositorios</a></li>
-<li><a href="#truea-adir-una-p-gina-de-detalle-del-repositorio">4.10. Añadir una página de detalle del repositorio</a></li>
+<li><a href="#truemodificaci-n-de-los-archivos-code-app-module-ts-code-y-code-app-component-ts-code">4.3. Modificación de los archivos <code>app.module.ts</code> y <code>app.component.ts</code></a></li>
+<li><a href="#truemodificaci-n-de-la-p-gina-de-inicio">4.4. Modificación de la página de inicio</a></li>
+<li><a href="#truecreaci-n-del-modelo-para-los-repositorios">4.5. Creación del modelo para los repositorios</a></li>
+<li><a href="#truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario">4.6. Creación de un servicio para obtener los repos de un usuario</a></li>
+<li><a href="#truecreaci-n-del-controlador-de-la-vista-de-repositorios">4.7. Creación del controlador de la vista de repositorios</a></li>
+<li><a href="#truecreaci-n-de-la-vista-del-listado-de-repositorios">4.8. Creación de la vista del listado de repositorios</a></li>
+<li><a href="#truea-adir-una-p-gina-de-detalle-del-repositorio">4.9. Añadir una página de detalle del repositorio</a></li>
 </ul>
 </li>
 </ul>
@@ -508,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Instalar Apache Cordova <code>sudo npm install -g cordova</code></p>
 </li>
 <li>
-<p>Instalar Ionic CLI <code>sudo npm install -g ionic@3.20.0</code></p>
+<p>Instalar Ionic CLI <code>sudo npm install -g ionic</code></p>
 </li>
 <li>
 <p>Instalar TypeScript <code>sudo npm install -g typescript</code></p>
@@ -549,7 +548,7 @@ Misc:
 <p>Para el desarrollo de proyectos Ionic usaremos Ionic CLI. Con él podremos iniciar una app, generar elementos de la app (componentes, páginas, providers, &#8230;&#8203;), iniciar un servidor web local para probar la app en el proceso de desarrollo, y demás operaciones útilies en el proceso de desarrollo de una app Ionic.</p>
 </div>
 <div class="paragraph">
-<p>Parar crear una app Ionic basta con escribir desde una terminal <code>ionic start</code> seguido del nombre de la app. Por ejemplo, <code>ionic start holamundoionic</code>.</p>
+<p>Parar crear una app Ionic basta con escribir desde una terminal <code>ionic start</code> seguido del nombre de la app. Por ejemplo, <code>ionic start holamundoionic</code>-</p>
 </div>
 <div class="paragraph">
 <p>A continuación tendremos que seleccionar el tipo de proyecto que queremos crear: basado basado en pestañas, en blanco, con barra lateral, &#8230;&#8203; Elegiremos la opción <code>tutorial</code>.</p>
@@ -558,18 +557,13 @@ Misc:
 <div class="content">
 <pre class="highlightjs highlight"><code>$ ionic start holamundoionic
 
-? What starter would you like to use:
-  tabs ............... ionic-angular A starting project with a simple tabbed int
-erface
+? What starter would you like to use: (Use arrow keys)
+❯ tabs ............... ionic-angular A starting project with a simple tabbed interface
   blank .............. ionic-angular A blank starter project
-  sidemenu ........... ionic-angular A starting project with a side menu with na
-vigation in the content area
-  super .............. ionic-angular A starting project complete with pre-built
-pages, providers and best practices for Ionic development.
-  conference ......... ionic-angular A project that demonstrates a realworld app
-lication
-❯ tutorial ........... ionic-angular A tutorial based project that goes along wi
-th the Ionic documentation
+  sidemenu ........... ionic-angular A starting project with a side menu with navigation in the content area
+  super .............. ionic-angular A starting project complete with pre-built pages, providers and best practices for Ionic development.
+  conference ......... ionic-angular A project that demonstrates a realworld application
+  tutorial ........... ionic-angular A tutorial based project that goes along with the Ionic documentation
   aws ................ ionic-angular AWS Mobile Hub Starter</code></pre>
 </div>
 </div>
@@ -667,53 +661,7 @@ $ ionic serve
 <div class="sect2">
 <h3 id="trueel-archivo-code-index-html-code"><a class="anchor" href="#trueel-archivo-code-index-html-code"></a>3.1. El archivo <code>index.html</code></h3>
 <div class="paragraph">
-<p>El código de la app se encuentra en <code>src</code>. Ahí encontramos el archivo <code>index.html</code>, el archivo desde el que se carga la app.</p>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Fragmento del archivo <code>src/app/index.html</code></div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en" dir="ltr"&gt;
-...
-&lt;body&gt;
-...
-
-  &lt;!-- Ionic's root component and where the app will load --&gt;
-  &lt;ion-app&gt;&lt;/ion-app&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-
-...
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Indicación de cargar el componente raíz</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>El archivo <code>index.html</code> tiene un fragmento JavaScript comentado relacionado con la activación de <em>service worker</em> relacionado con las <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">aplicaciones web progresivas</a></p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>El archivo <code>app.html</code> contiene el componente raiz de la app, <code>&lt;ion-app&gt;&lt;/ion-app&gt;</code>. Este componente cargará el contenido de <code>src/app/app.html</code>, la vista raiz de la app.</p>
+<p>El código de la app se encuentra en <code>src</code>. Ahí encontramos el archivo <code>index.html</code>, el archivo desde el que se carga la app. Este archivo contiene el componente raiz de la app, <code>&lt;ion-app&gt;&lt;/ion-app&gt;</code>. Este componente cargará el contenido de <code>src/app/app.html</code>, la vista raiz de la app.</p>
 </div>
 <div class="listingblock">
 <div class="title">El archivo <code>src/app/app.html</code></div>
@@ -743,11 +691,25 @@ $ ionic serve
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Cabecera de la barra de menú</td>
+<td>Cabecera de la app</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Contenido de la app. Mediante un bucle cargará la lista de páginas y le asociará un controlador de evento</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>El archivo <code>index.html</code> tiene un fragmento JavaScript comentado relacionado con la activación de <em>service worker</em> relacionado con las <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">aplicaciones web progresivas</a></p>
+</div>
+</td>
 </tr>
 </table>
 </div>
@@ -822,7 +784,7 @@ export class AppModule {}</code></pre>
 <div class="sect2">
 <h3 id="truemodificaci-n-de-las-p-ginas-generadas"><a class="anchor" href="#truemodificaci-n-de-las-p-ginas-generadas"></a>3.3. Modificación de las páginas generadas.</h3>
 <div class="paragraph">
-<p>A modo de ejemplo modificaremos el contenido de la página de inicio (<code>src/app/pages/hello-ionic/hello-ionic.html</code>) incluyendo texto ficticio <a href="https://getlorem.com/es/">Lorem Ipsum</a>. Añadiremos al final del tag <code>&lt;ion-content&gt;</code> una lista de dos elementos.</p>
+<p>A modo de ejemplo modificaremos el contenido de la página de inicio incluyendo texto ficticio <a href="https://getlorem.com/es/">Lorem Ipsum</a>. Añadiremos al final del tag <code>&lt;ion-content&gt;</code> una lista de dos elementos.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -845,12 +807,12 @@ export class AppModule {}</code></pre>
 <h2 id="truecreaci-n-de-una-app-de-ejemplo"><a class="anchor" href="#truecreaci-n-de-una-app-de-ejemplo"></a>4. Creación de una app de ejemplo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A modo de ejemplo crearemos una app que muestre los repositorios de un usuario de GitHub y muestre el archivo <code>README.md</code> del repositorio seleccionado.</p>
+<p>A modo de ejemplo crearemos una app que muestre los repositorios de un usuario de GitHub y muestre el archivo README.md del repositorio seleccionado.</p>
 </div>
 <div class="sect2">
 <h3 id="truegeneraci-n-de-p-ginas-en-ionic"><a class="anchor" href="#truegeneraci-n-de-p-ginas-en-ionic"></a>4.1. Generación de páginas en Ionic</h3>
 <div class="paragraph">
-<p>Las páginas son generadas con <code>ionic generate page <em>nombrePagina</em></code> o <code>ionic g page <em>nombrePagina</em></code> en su forma abreviada.</p>
+<p>Las páginas son generadas con <code>ionic generate page <em>nombrePagina</em></code> o <code>ionic g p <em>nombrePagina</em></code> en su forma abreviada.</p>
 </div>
 <div class="paragraph">
 <p>Para generar la página <code>repos</code> escribiriemos</p>
@@ -877,7 +839,7 @@ export class AppModule {}</code></pre>
 <p><code>repos.scss</code>: Estilos propios de la página</p>
 </li>
 <li>
-<p><code>repos.ts</code>: Controlador de la página</p>
+<p><code>repos.ts</code>: Controlador de lá página</p>
 </li>
 </ul>
 </div>
@@ -888,7 +850,7 @@ export class AppModule {}</code></pre>
 <p>En primer lugar cambiaremos el título de la página y el texto mostrado en la vista. También debemos incluir un botón para activar el menú desde la página de repositorios</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. El archivo <code>src/app/pages/repos/repos.html</code></div>
+<div class="title">Example 1. El archivo <code>src/app/pages/repos/repos.html</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -926,10 +888,10 @@ export class AppModule {}</code></pre>
 </table>
 </div>
 <div class="paragraph">
-<p>A continuación cambiaremos en el controlador el texto mostrado en la consola al cargar la vista.</p>
+<p>A continuación cambiaremos en el controlador el texto mostrado al cargar la vista</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. El archivo <code>src/app/pages/repos/repos.ts</code></div>
+<div class="title">Example 2. El archivo <code>src/app/pages/repos/repos.ts</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -969,15 +931,15 @@ export class ReposPage {
 </div>
 </div>
 <div class="sect2">
-<h3 id="truemodificaci-n-del-archivo-code-app-module-ts-code"><a class="anchor" href="#truemodificaci-n-del-archivo-code-app-module-ts-code"></a>4.3. Modificación del archivo <code>app.module.ts</code></h3>
+<h3 id="truemodificaci-n-de-los-archivos-code-app-module-ts-code-y-code-app-component-ts-code"><a class="anchor" href="#truemodificaci-n-de-los-archivos-code-app-module-ts-code-y-code-app-component-ts-code"></a>4.3. Modificación de los archivos <code>app.module.ts</code> y <code>app.component.ts</code></h3>
 <div class="paragraph">
-<p>Tras crear una página deberemos actualizar <code>app.module.ts</code> añadiendo la página a la zona de importaciones y modificando las propiedades <code>declarations</code> y <code>entryPoints</code> de <code>@NgModule</code>.</p>
+<p>Tras crear una página deberemos actualizar <code>app.module.ts</code> y <code>app.component.ts</code> añadiendo la página a la zona de importaciones y modificando las propiedades <code>declarations</code> y <code>entryPoints</code> de <code>@NgModule</code>.</p>
 </div>
 <div class="paragraph">
 <p>Aprovecharemos para eliminar las referencias de las páginas <code>ItemDetailsPage</code> y <code>ListPage</code> creadas para el tutorial, y para importar <code>HttpModule</code>, el cual será necesario más adelante cuando definamos el servicio.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. Actualización del archivo <code>app.module.ts</code> para incluir la página de repositorios</div>
+<div class="title">Example 3. Actualización del archivo <code>app.module.ts</code> para incluir la página de repositorios</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1036,17 +998,8 @@ export class AppModule {}</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="truemodificaci-n-del-archivo-code-app-component-ts-code"><a class="anchor" href="#truemodificaci-n-del-archivo-code-app-component-ts-code"></a>4.4. Modificación del archivo <code>app.component.ts</code></h3>
-<div class="paragraph">
-<p>En este archivo realizaremos los cambios relacionados con el menú lateral para eliminar las referencias a las páginas no necesarias y para incluir la referencia a la página creada. Será necesario añadir la página a la ista de importaciones.</p>
-</div>
-<div class="paragraph">
-<p>En el archivo también indicaremos el texto que se usará en el menú lateral para hacer referencia a la página creada.</p>
-</div>
 <div class="exampleblock">
-<div class="title">Example 5. Actualización del archivo <code>app.component.ts</code> para incluir la página de repositorios</div>
+<div class="title">Example 4. Actualización del archivo <code>app.component.ts</code> para incluir la página de repositorios</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1070,8 +1023,8 @@ export class MyApp {
     this.initializeApp();
 
     // set our app's pages
-    this.pages = [ <i class="conum" data-value="3"></i><b>(3)</b>
-      { title: 'Inicio', component: HelloIonicPage },
+    this.pages = [
+      { title: 'Inicio', component: HelloIonicPage }, <i class="conum" data-value="3"></i><b>(3)</b>
       { title: 'Repos de un usuario', component: ReposPage }
     ];
   }
@@ -1091,7 +1044,7 @@ export class MyApp {
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Array con las páginas a cargar desde el menú lateral y sus títulos asociados.</td>
+<td>Títulos que tendrán las páginas en el menú lateral</td>
 </tr>
 </table>
 </div>
@@ -1099,12 +1052,12 @@ export class MyApp {
 </div>
 </div>
 <div class="sect2">
-<h3 id="truemodificaci-n-de-la-p-gina-de-inicio"><a class="anchor" href="#truemodificaci-n-de-la-p-gina-de-inicio"></a>4.5. Modificación de la página de inicio</h3>
+<h3 id="truemodificaci-n-de-la-p-gina-de-inicio"><a class="anchor" href="#truemodificaci-n-de-la-p-gina-de-inicio"></a>4.4. Modificación de la página de inicio</h3>
 <div class="paragraph">
 <p>Cambiar la cabecera y el contenido de la página de esta forma</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 6. Actualización del archivo <code>src/app/pages/hello-ionic.html</code></div>
+<div class="title">Example 5. Actualización del archivo <code>src/app/pages/hello-ionic.html</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1144,16 +1097,16 @@ export class MyApp {
 </div>
 </div>
 <div class="paragraph">
-<p>Con todos los cambios realizados la aplicación deberá verse así</p>
+<p>La aplicación deberá verse así</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="./images/04GitHubInicio.png" alt="04GitHubInicio.png" title="Menú de inicio, página de inicio y de repositorios"></span></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="truecreaci-n-del-modelo-para-los-repositorios"><a class="anchor" href="#truecreaci-n-del-modelo-para-los-repositorios"></a>4.6. Creación del modelo para los repositorios</h3>
+<h3 id="truecreaci-n-del-modelo-para-los-repositorios"><a class="anchor" href="#truecreaci-n-del-modelo-para-los-repositorios"></a>4.5. Creación del modelo para los repositorios</h3>
 <div class="paragraph">
-<p>Crearemos un modelo para almacenar cada uno de los repositorios GitHub de un usuario. Se trata de una clase que guarda los campos que queremos extraer de los repositorios a través la API, ignorando aquellos campos en los que no estemos interesados. En nuestro caso nos quedaremos con el nombre y descripción de los repositorios (<code>name</code> y <code>description</code>).</p>
+<p>Crearemos un modelo para almacenar cada uno de los repositorios GitHiub de un usuario. Se trata de una clase que guarda los campos que queremos extraer de los repositorios a través la API, ignorando aquellos campos en los que no estemos interesados. En nuestro caso nos quedaremos con el nombre y descripción de los repositorios (<code>name</code> y <code>description</code>).</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1163,30 +1116,17 @@ export class MyApp {
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Para una mayor organización, almacenaremos los modelos del proyecto en una carpeta <code>src/models</code>.</p>
+<p>Para una mayor organización, almacenaremos los modelos en una carpeta <code>src/models</code> que crearemos desde la terminal.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="exampleblock">
-<div class="title">Example 7. El archivo <code>src/models/repo.ts</code></div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js" data-lang="js">export interface Repo {
-    name: string;
-    description: string;
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario"><a class="anchor" href="#truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario"></a>4.7. Creación de un servicio para obtener los repos de un usuario</h3>
+<h3 id="truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario"><a class="anchor" href="#truecreaci-n-de-un-servicio-para-obtener-los-repos-de-un-usuario"></a>4.6. Creación de un servicio para obtener los repos de un usuario</h3>
 <div class="paragraph">
-<p>Vamos a crear un servicio para obtener los repos de un usuario GitHub desde <code><a href="https://api.github.com/users/" class="bare">https://api.github.com/users/</a><em>nombreusuario</em>/repos</code>, donde <code><em>nombreusuario</em></code> corresponde con un usuario GitHub. En esta aplicación, el nombre de usuario será obtenido a partir de un cuadro de texto que crearemos más adelante.</p>
+<p>Vamos a crear un servicio para obtener los repos de un usuario GitHub desde <a href="https://api.github.com/users/" class="bare">https://api.github.com/users/</a><em>nombreusuario</em>/repos, donde <em>nombreusuario</em> corresponde con un usuario GitHub. En esta aplicación, el nombre de usuario será obtenido a partir de un cuadro de texto que crearemos más adelante.</p>
 </div>
 <div class="paragraph">
 <p>Los servicios se crean con <code>ionic generate provider <em>servicio</em></code> o <code>ionic g provider <em>servicio</em></code> en su forma abreviada. Para crear el servicio <code>repos</code> escribiremos</p>
@@ -1203,15 +1143,12 @@ export class MyApp {
 <div class="content">
 <div class="title">El decorador <code>@Injectable</code></div>
 <div class="paragraph">
-<p>Al crear un servicio, Ionic CLI le añade el decorador <code>@Injectable</code>. A aquellos componentes en los que queramos usar el servicio, lo <em>inyectaremos</em> en su constructor y así podrán acceder a la funcionalidad implementada por los métodos del servicio.</p>
-</div>
-<div class="paragraph">
-<p>Al inyectar un servicio en el constructor se creará una variable de instancia desde la que podremos acceder a la funcionalidad implementada por los métodos del servicio.</p>
+<p>Al crear un servicio, Ionic CLI le añade el decorador <code>@Injectable</code>. Aquellos componentes que quieran usar este servicio lo <em>inyectarán</em> en su constructor y así podrán acceder a la funcionalidad implementada por los métodos del servicio.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>El servicio <code>repos</code> contará con un método que devolverá un array con los repositorios del usuario proporcionado. En el servicio generado tenemos que hacer las siguientes modificaciones:</p>
+<p>El servicio devolverá un array de repositorios. En el servicio generado tenemos que hacer las siguientes modificaciones:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1222,10 +1159,10 @@ export class MyApp {
 <p>Modificar el tipo de datos del parámetro <code>http</code> en el constructor para adaptarlo a la importación del paso anterior.</p>
 </li>
 <li>
-<p>Importar el modelo del repositorio, <code>Observable</code> y el método <code>map</code>. Dichos componentes no están disponibles en Angular y son incorporados de la librería de ReactJS (RxJS).</p>
+<p>Importar el modelo del repositorio, <code>Observable</code> y el método <code>map</code>. Dichos componentes no están disponibles en Angular y son incorporados de la librería de React.</p>
 </li>
 <li>
-<p>Crear un método <code>getRepos()</code> que obtendrá los repos del usuario que se pase como parámetro. Este método devuelve los repositorios como un <a href="https://angular.io/guide/observables"><em>observable</em></a></p>
+<p>Crear un método <code>getRepos()</code> que obtendrá los repos del usuario que se pase com parámetro. Este método devuelve los repositorios como un <em>observable</em></p>
 </li>
 </ul>
 </div>
@@ -1241,7 +1178,7 @@ export class MyApp {
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 8. El servicio `src/providers/repos/repos.ts</div>
+<div class="title">Example 6. El servicio `src/providers/repos/repos.ts</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1254,7 +1191,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ReposProvider {
-  username: string;
 
   constructor(public http: Http) { } <i class="conum" data-value="3"></i><b>(3)</b>
 
@@ -1272,11 +1208,11 @@ export class ReposProvider {
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Importación de la clase del modelo del repositorio, del componente <code>Observable</code> y del método <code>map</code> (El método <code>map</code> crea un array con el resultado de llamar a la función proporcionada sobre cada elemento del array)</td>
+<td>Importación de la clase del modelo del repositorio del componente <code>Observable</code> y del método <code>map</code> (El método <code>map</code> crea un array con el resultado de llamar a la función proporcionada sobre cada elemento del array)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Modificación del tipo del parámetro del constructor y eliminación del cuerpo predefinido del constructor.</td>
+<td>Modificación del tipo del parámetro del constructor y eliminación del cuerpo predefinido del constructror.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -1325,62 +1261,14 @@ function (param) {
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="truemodificaci-n-del-archivo-code-src-app-app-module-ts-code"><a class="anchor" href="#truemodificaci-n-del-archivo-code-src-app-app-module-ts-code"></a>4.7.1. Modificación del archivo <code>/src/app/app.module.ts</code></h4>
-<div class="paragraph">
-<p>Una vez implementados los métodos del servicio, hay que incluir <code>HttpModule</code> en el archivo de módulos <code>app.module.ts</code> y añadir el servicio creado (<code>ReposProvider</code>)</p>
-</div>
-<div class="exampleblock">
-<div class="title">Example 9. Actualización del archivo <code>src/app/app.module.ts</code> para incluir <code>HttpModule</code></div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js" data-lang="js">import { HttpModule } from '@angular/http'; <i class="conum" data-value="1"></i><b>(1)</b>
-...
-
-@NgModule({
-  ...
-  imports: [
-    ...
-    HttpModule <i class="conum" data-value="2"></i><b>(2)</b>
-  ],
-  ...
-  providers: [
-    ...
-    ReposProvider, <i class="conum" data-value="3"></i><b>(3)</b>
-    HttpModule
-  ]
-})
-...</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Importar <code>HttpModule</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Incluir <code>HttpModule</code> en el array <code>imports</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Incluir el servicio (<code>ReposProvider</code>) y <code>HttpModule</code> en el array <code>providers</code></td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="truecreaci-n-del-controlador-de-la-vista-de-repositorios"><a class="anchor" href="#truecreaci-n-del-controlador-de-la-vista-de-repositorios"></a>4.8. Creación del controlador de la vista de repositorios</h3>
+<h3 id="truecreaci-n-del-controlador-de-la-vista-de-repositorios"><a class="anchor" href="#truecreaci-n-del-controlador-de-la-vista-de-repositorios"></a>4.7. Creación del controlador de la vista de repositorios</h3>
 <div class="paragraph">
 <p>El controlador devolverá un array de objetos repositorio a partir de un nombre de usuario de GitHub. Por tanto, contará con una variable de instancia para recibir el nombre de usuario de la vista y con un array de objetos repositorio (los cuales habrá que importar) que entregará a la vista para que los presente. Además, realizará inyección de dependencias inyectando en su constructor el servicio creado. Por tanto, habrá que importar también el servicio.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 10. El archivo <code>src/app/pages/repos/repos.ts</code></div>
+<div class="title">Example 7. El archivo <code>src/app/pages/repos/repos.ts</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1396,15 +1284,14 @@ import { ReposProvider } from '../../providers/repos/repos'; <i class="conum" da
   templateUrl: 'repos.html',
 })
 export class ReposPage {
-  username: string; <i class="conum" data-value="3"></i><b>(3)</b>
-  repos: Repo[]; <i class="conum" data-value="4"></i><b>(4)</b>
-
+  repos: Repo[];
+  public username;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private reposProvider: ReposProvider) {  } <i class="conum" data-value="5"></i><b>(5)</b>
+    private reposProvider: ReposProvider) {  } <i class="conum" data-value="3"></i><b>(3)</b>
 
-  getRepos() { <i class="conum" data-value="6"></i><b>(6)</b>
+  getRepos() { <i class="conum" data-value="4"></i><b>(4)</b>
     this.reposProvider.getRepos(this.username).subscribe(reposArray =&gt; {
       this.repos = reposArray;
     })
@@ -1427,19 +1314,11 @@ export class ReposPage {
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Qué necesita el controlador para generar la lista de repositorios</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Qué devuelve el controlador</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Inyección del servicio</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Método que se suscribe al servicio y construye el array de repositorios</td>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Método que se suscribe al servicio y construye en array de repositorios</td>
 </tr>
 </table>
 </div>
@@ -1447,12 +1326,12 @@ export class ReposPage {
 </div>
 </div>
 <div class="sect2">
-<h3 id="truecreaci-n-de-la-vista-del-listado-de-repositorios"><a class="anchor" href="#truecreaci-n-de-la-vista-del-listado-de-repositorios"></a>4.9. Creación de la vista del listado de repositorios</h3>
+<h3 id="truecreaci-n-de-la-vista-del-listado-de-repositorios"><a class="anchor" href="#truecreaci-n-de-la-vista-del-listado-de-repositorios"></a>4.8. Creación de la vista del listado de repositorios</h3>
 <div class="paragraph">
 <p>La vista estará formada por un cuadro de texto para introducir el nombre usuario de GitHub, un botón para realizar la petición y la lista de repositorios del usuario. Tanto el cuadro de texto como la lista estarán vinculados a variables de instancia en su controlador.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 11. El archivo <code>src/app/pages/repos/repos.html</code></div>
+<div class="title">Example 8. El archivo <code>src/app/pages/repos/repos.html</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1514,7 +1393,7 @@ export class ReposPage {
 </div>
 </div>
 <div class="sect2">
-<h3 id="truea-adir-una-p-gina-de-detalle-del-repositorio"><a class="anchor" href="#truea-adir-una-p-gina-de-detalle-del-repositorio"></a>4.10. Añadir una página de detalle del repositorio</h3>
+<h3 id="truea-adir-una-p-gina-de-detalle-del-repositorio"><a class="anchor" href="#truea-adir-una-p-gina-de-detalle-del-repositorio"></a>4.9. Añadir una página de detalle del repositorio</h3>
 <div class="paragraph">
 <p>Continuando con nuestra aplicación estamos interesados en mostrar detalles de un repositorio al seleccionarlo en la lista de resultados. Esto lo podemos hacer pasando a una página de detalle para mostrar los resultados. Seguiremos estos pasos:</p>
 </div>
@@ -1552,9 +1431,9 @@ import { RepoDetailsPage } from '../pages/repo-details/repo-details';
 </div>
 </li>
 <li>
-<p>Crear un método en el controlador de la página que hace la llamada (<code>src/app/pages/repos/repos.ts</code>) que se encargue de abrir la página de detalle. El método tomará como parámetro el repositorio del que se quiere mostrar la información detallada, por lo que habrá que importar la clase del modelo del repositorio. Para abrir la página de detalle, le pasaremos al NavController la página de detalle, por lo que también habrá que importarla.</p>
+<p>Crear un método en el controlador de la página que hace la llamada (<code>src/app/pages/repos/repos.ts</code>) que se encargue de abrir la página de detalle. El método tomará como parámetro el repositorio del que se quiere mostrar la información detallada por lo que habrá que importar la clase del modelo del repositorio. Para abrir la página de detalle, le pasaremos al NavController la página de detalle, por lo que también habrá que importarla.</p>
 <div class="exampleblock">
-<div class="title">Example 12. Modificación de <code>src/app/pages/repos/repos.ts</code> para abrir la página de detalles</div>
+<div class="title">Example 9. Modificación de <code>src/app/pages/repos/repos.ts</code> para abrir la piǵna de detalles</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1584,37 +1463,7 @@ import { RepoDetailsPage } from '../repo-details/repo-details'; <i class="conum"
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Abrir la página de detalle pasándosela a NavController junto con un parámetro <code>repo</code>. Los parámetros son pasados como una lista clave-valor</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modificar la vista para llamar al método que carga la página de detalles</p>
-<div class="exampleblock">
-<div class="title">Example 13. El archivo <code>src/pages/repos/repos.html</code></div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code>...
-&lt;ion-list&gt;
-&lt;button ion-item *ngFor="let repo of repos" (click)="getDetails(repo)"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;h2&gt;{{ repo.name }}&lt;/h2&gt;
-  &lt;p&gt;{{ repo.description }}&lt;/p&gt;
-
-  &lt;ion-icon name="arrow-forward" item-right&gt;&lt;/ion-icon&gt;
-&lt;/button&gt;
-&lt;/ion-list&gt;
-...</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Al hacer clic llamar al método <code>getDetails</code> pasándole el repositorio seleccionado.</td>
+<td>Abrir la página de detalle pasándosela a NavController junto con un parámetro repo</td>
 </tr>
 </table>
 </div>
@@ -1624,7 +1473,7 @@ import { RepoDetailsPage } from '../repo-details/repo-details'; <i class="conum"
 <li>
 <p>Obtener los parámetros en la página de detalle <code>src/app/pages/repo-details/repo-details.ts</code></p>
 <div class="exampleblock">
-<div class="title">Example 14. El archivo <code>src/app/pages/repo-details/repo-details.ts</code></div>
+<div class="title">Example 10. El archivo <code>src/app/pages/repo-details/repo-details.ts</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1675,7 +1524,7 @@ export class RepoDetailsPage {
 <li>
 <p>Mostrar los detalles en la vista</p>
 <div class="exampleblock">
-<div class="title">Example 15. El archivo <code>src/app/pages/repo-details/repo-details.html</code></div>
+<div class="title">Example 11. El archivo <code>src/app/pages/repo-details/repo-details.html</code></div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1700,7 +1549,7 @@ export class RepoDetailsPage {
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Uso del <code>If-then-else</code> de Angular para mostrar la descripción si existe</td>
+<td>Uso del If-then-else de Angular para mostrar la descripción si existe</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1723,7 +1572,7 @@ export class RepoDetailsPage {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-03-25 14:10:30 CET
+Last updated 2018-03-20 12:02:08 CET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
